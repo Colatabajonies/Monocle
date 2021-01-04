@@ -1,0 +1,64 @@
+<aura:component access="global" implements="flexipage:availableForAllPageTypes,force:hasRecordId,lightning:availableForFlowScreens" controller="Monocle_ListenerHelper">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="contextRecordId" type="String" />
+    <aura:attribute name="componentTitle" type="String" default="" />
+    <aura:attribute name="inputTitle" type="String" default="" />
+    <aura:attribute name="helpText" type="String" default="" />
+    <aura:attribute name="matchType" type="String" default="Intent" />
+    <aura:attribute name="matchValue" type="String" default="" />
+    <aura:attribute name="speakerMatch" type="String" default="Agent" />
+    
+    <aura:attribute name="inputType" type="String" default="text" />
+    <aura:attribute name="completed" type="Boolean" default="false"  />
+    <aura:attribute name="active" type="Boolean" default="true"  />
+    <aura:attribute name="strValue" type="String" default=""  />
+    <aura:attribute name="utterance" type="String" default="the utterance" />
+    <aura:attribute name="disabled" type="Boolean" default="false"  />
+    <aura:attribute name="autoNav" type="Boolean" default="false" />
+    
+    <aura:attribute name="oValueBool" type="Boolean" default="false" />
+    <aura:attribute name="oValueString" type="String" default="" />
+    
+    <!-- init-->
+    <aura:handler name="init" value="{!this }" action="{! c.doInit}"/>
+    <aura:handler event="c:Monocle_PredictionPayload" action="{!c.doRefresh}"/>
+    <aura:registerEvent name="appEvent" type="c:Monocle_PredictionStatus"/>
+    
+    <div style="padding:10px;">
+        <b>{!v.componentTitle}</b>
+        <table>
+            <tr>
+                <td>
+                    <aura:if isTrue="{!and(!v.completed, v.active)}">
+                        <div class="slds-icon-eq slds-is-animated" title="Processing..." style="display:inline-flex;margin-right:5px;">
+                            <div class="slds-icon-eq__bar"></div>
+                            <div class="slds-icon-eq__bar"></div>
+                            <div class="slds-icon-eq__bar"></div>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.completed}">
+                        <span style="margin-right:5px;padding-top:10px;width:33px;">
+                            <lightning:icon iconName="utility:success" alternativeText="input match!" variant="Success" title="match" size="x-small" />
+                        </span>
+                    </aura:if>
+                    <span class="slds-form-element__label slds-no-flex" style="font-size:.75rem;">{!v.inputTitle}</span>
+                    <aura:if isTrue="{!and(v.helpText != null, v.helpText != '')}">
+                        <span style="padding-left:1px;">
+                            <lightning:helptext content="{!v.helpText}" />
+                        </span>
+                    </aura:if>
+                </td>
+                
+                <td style="text-align:right;">
+                    <aura:if isTrue="{!and(!v.completed, and(v.matchType == 'Intent', !v.disabled))}">
+                        <button class="slds-button" type="button" onclick="{!c.setField}">Mark Complete</button>
+                    </aura:if>
+                    <aura:if isTrue="{!and(v.completed, !v.disabled)}">
+                        <button class="slds-button" type="button" onclick="{!c.clearField}">Clear</button>
+                    </aura:if>
+                </td>
+            </tr>
+        </table>                    
+        <lightning:input label="{!v.inputTitle}" aura:id="theInput" oncommit="{!c.checkChange}" disabled="{!v.disabled}" value="{!v.strValue}" name="theInput" type="{!v.inputType}" checked="{!v.completed}" variant="label-hidden" />        
+    </div>
+</aura:component>

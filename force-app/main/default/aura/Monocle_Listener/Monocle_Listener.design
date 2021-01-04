@@ -1,0 +1,11 @@
+<design:component label="Monocle - Feedback Listener">
+    <sfdc:objects>
+        <sfdc:object>VoiceCall</sfdc:object>
+        <sfdc:object>LiveChatTranscript</sfdc:object>
+        <sfdc:object>MessagingSession</sfdc:object>
+    </sfdc:objects>
+        <design:attribute name="iModelID" label="Itent ModelID" description="The intent modelID to use for intent matches" required="false" />
+        <design:attribute name="sModelID" label="Sentiment ModelID" description="The sentiment modelID to use for real-time sentiment" required="false" />
+    	<design:attribute name="contextRecordId" label="Context RecordId" description="The Id of the Voice Call, Chat Transcript, or Messaging Session (for use in flow)" required="false" />
+    	<design:attribute name="hide" label="Hide Einstein Header" description="If set, the Einstein header will be hidden" required="false" />
+</design:component>

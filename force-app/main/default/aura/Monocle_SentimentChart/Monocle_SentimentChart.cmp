@@ -1,14 +1,15 @@
-<aura:component access="global" controller="Monocle_Helper">
+<aura:component access="global" implements="flexipage:availableForAllPageTypes,force:hasRecordId,lightning:availableForFlowScreens" controller="Monocle_ListenerHelper">
     <aura:attribute name="myChart" type="Object"/>
     <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="contextRecordId" type="String" />
+    
     <aura:attribute name="chartVisible" type="Boolean" default="true" />
-    <aura:attribute name="feedbackResponse" type="FeedbackResponse__c" />
     <aura:attribute name="customerData" type="Integer[]" />
     <aura:attribute name="agentData" type="Integer[]" />
     <aura:attribute name="chartLabels" type="String[]" />
     
     <ltng:require scripts="{!$Resource.monocle_chart}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
-    <aura:method name="refreshResults" action="{!c.doRefresh}" access="PUBLIC" /> 
+    <aura:handler event="c:Monocle_PredictionPayload" action="{!c.doRefresh}"/>
     
     <aura:if isTrue="{!v.chartVisible}">
         <div style="width:100%;margin-bottom:10px;padding-right:5px;">

@@ -1,0 +1,14 @@
+<design:component label="Monocle - Prediction">
+	<design:attribute name="contextRecordId" label="00: Context RecordId" description="The Id of the Voice Call, Chat Transcript, or Messaging Session (for use in flow)" required="false" />
+    <design:attribute name="componentTitle" label="01: Component Title" description="A title to show at the top of the component. (optional)" required="false" />
+    <design:attribute name="inputTitle" label="02: Input Label" description="A label for the input. (optional)" required="false" />
+    <design:attribute name="helpText" label="03: Help Text" description="Specify a help text that describes the input" required="false" />
+    <design:attribute name="matchType" label="04: Match Type" description="The type of match (valid values: Intent,Keyword,RegEx,Named Entity)" datasource="Intent,Keyword,RegEx,Named Entity" default="Intent" required="false" />
+    <design:attribute name="matchValue" label="05: Match Value" description="The value to match" required="false" />
+    <design:attribute name="speakerMatch" label="06: Speaker" description="Who needs to speak the utterance? (valid values: Agent,Customer,Agent or Customer)" datasource="Agent,Customer,Agent or Customer" default="Agent" required="false" />
+    <design:attribute name="disabled" label="07: Disable Agent Input" description="If set, the agent will not be allowed to update/clear voice activated control" required="false" />
+    <design:attribute name="autoNav" label="08: Auto-advance flow" description="If part of a flow screen, the component can auto advance the flow screen when filled." />
+    <design:attribute name="oValueBool" label="09: Output Boolean" description="Output Set to true if match was found. False if no match." />
+    <design:attribute name="oValueString" label="10: Output String" description="Output Match Keyword, RegEx, or Entity." />
+    
+</design:component>

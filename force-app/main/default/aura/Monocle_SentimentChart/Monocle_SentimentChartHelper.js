@@ -1,34 +1,4 @@
 ({ 
-    getFeedbackResponse : function(component, event, helper)
-    {
-        var action = component.get('c.getSentimentFeedbackResponse'); 
-        action.setParams({
-            "recordId" : component.get('v.recordId') 
-        });
-        action.setCallback(this, function(a){
-            var state = a.getState(); // get the response state
-            if(state == 'SUCCESS') {
-                var retVal = a.getReturnValue();
-                if (retVal == null || !retVal.EnableSentiment__c)
-                {
-                    console.log('Sentiment not enabled');
-                    component.set('v.chartVisible', false);
-                }
-                else
-                {
-                    component.set('v.feedbackResponse', retVal);
-                    this.refreshResults(component, helper, null);
-                }
-            }
-            else
-            {
-                console.log('Error retrieving Feedback Response');
-                component.set('v.chartVisible', false);
-            }
-        });
-        $A.enqueueAction(action);
-    },
-    
     loadChart : function(component, event, helper)
     {
        //alert('loading chart');
@@ -93,20 +63,15 @@
         component.set("v.myChart", varMyChart); 
     },
     
-    refreshResults : function(component, helper, inter)
+    refreshResults : function(component, event, helper)
     {
-        if (!component.isValid())
-        {
-            window.clearInterval(inter);
-            console.log('Component no longer valid!');
-            return;
-        }
-        console.log('refresh called');
-        
         //Refresh the data
         var action = component.get('c.getSentimentChartData'); 
         action.setParams({
-            "feedbackResponseId" : component.get('v.feedbackResponse').Id 
+            "recordId" : component.get('v.recordId'),
+            "speaker" : event ? event.getParam("speaker") : null,
+            "utterance" : event ? event.getParam("utterance") : null,
+            "payload" : event ?  event.getParam("payload") : null
         });
         action.setCallback(this, function(a){
             var state = a.getState(); // get the response state

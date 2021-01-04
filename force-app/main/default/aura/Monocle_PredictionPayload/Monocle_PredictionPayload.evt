@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="Event that publishes the results of an utterance Prediction">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="type" type="String"/>
+    <aura:attribute name="speaker" type="String"/>
+    <aura:attribute name="utterance" type="String"/>
+    <aura:attribute name="payload" type="einsteinplay.Einstein_PredictionResult"/>
+</aura:event>
