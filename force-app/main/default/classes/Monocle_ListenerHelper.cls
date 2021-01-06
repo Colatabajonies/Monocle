@@ -36,6 +36,10 @@ public class Monocle_ListenerHelper
                 {
                     retVal.Chat_Transcript__c = recordId;
                 }
+                else if (recordId.startsWith('0Mw'))
+                {
+                    retVal.Messaging_Session__c = recordId;
+                }
                 
             }
                         
@@ -117,12 +121,16 @@ public class Monocle_ListenerHelper
         List<Einstein_Insight__c> retVals;
         Einstein_Insight__c retVal;
         if (recordId.startsWith('0LQ'))
-        {
+        {//Voice Call
             retVals = new List<Einstein_Insight__c>([SELECT Id, Completed__c, MatchValue__c, Utterance__c FROM Einstein_Insight__c WHERE Voice_Call__c =: recordId AND Title__c =: title LIMIT 1]);
         }
         else if (recordId.startsWith('570'))
-        {
+        {//Chat Transcript
             retVals = new List<Einstein_Insight__c>([SELECT Id, Completed__c, MatchValue__c, Utterance__c FROM Einstein_Insight__c WHERE Chat_Transcript__c =: recordId AND Title__c =: title LIMIT 1]);
+        }
+        else if (recordId.startsWith('0Mw'))
+        {//Messaging Session
+            retVals = new List<Einstein_Insight__c>([SELECT Id, Completed__c, MatchValue__c, Utterance__c FROM Einstein_Insight__c WHERE Messaging_Session__c =: recordId AND Title__c =: title LIMIT 1]);
         }
         
         if (retVals.size() > 0)
@@ -148,6 +156,15 @@ public class Monocle_ListenerHelper
         {
             LiveChatTranscript  ct = [SELECT Id, Status  FROM LiveChatTranscript  WHERE ID=: recordId];
             if (ct.Status != 'InProgress')
+            {
+                //The Chat is over
+                return false;
+            }
+        }
+        else if (recordId.startsWith('0Mw'))
+        {//Messaging Session
+            MessagingSession  ms = [SELECT Id, Status  FROM MessagingSession  WHERE ID=: recordId];
+            if (ms.Status != 'Active')
             {
                 //The Chat is over
                 return false;
@@ -272,6 +289,17 @@ public class Monocle_ListenerHelper
                 INSERT newSentiment;                
             }
             retVals = new List<Einstein_Insight__c>([SELECT Id, CreatedDate, Sentiment__c, Sentiment_Confidence__c, Speaker__c, ParentCreationDate__c FROM Einstein_Insight__c WHERE Chat_Transcript__c =: recordId AND Sentiment__c  !=: '' ORDER BY CreatedDate ASC]);
+        }
+        else if (recordId.startsWith('0Mw'))
+        {
+            if (String.isNotBlank(utterance))
+            {
+                newSentiment.Messaging_Session__c = recordId;
+                MessagingSession ms = [SELECT ID, CreatedDate FROM MessagingSession WHERE Id=: recordId LIMIT 1];
+                newSentiment.ParentCreationDate__c = ms.CreatedDate;
+                INSERT newSentiment;                
+            }
+            retVals = new List<Einstein_Insight__c>([SELECT Id, CreatedDate, Sentiment__c, Sentiment_Confidence__c, Speaker__c, ParentCreationDate__c FROM Einstein_Insight__c WHERE Messaging_Session__c =: recordId AND Sentiment__c  !=: '' ORDER BY CreatedDate ASC]);
         }
 
         

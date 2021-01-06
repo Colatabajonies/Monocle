@@ -123,6 +123,6 @@
         }
         
         var theratio = completedCount / items.length * 100;
-        component.set('v.feedbackResponseScore', Math.ceil(theratio / 10) * 10);
+        component.set('v.feedbackResponseScore', Math.round(theratio / 10) * 10);
     }
 })
