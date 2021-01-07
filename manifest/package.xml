@@ -7,6 +7,7 @@
         <members>Einstein_Insight__c.ParentCreationDate__c</members>
         <members>Einstein_Insight__c.Title__c</members>
         <members>Einstein_Insight__c.Utterance__c</members>
+        <members>Einstein_Insight__c.Speaker__c</members>
         <name>CustomField</name>
     </types>
     <types>
