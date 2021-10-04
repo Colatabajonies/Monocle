@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>v1</fullName>
+    <botDialogs>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Check_status_of_an_issue</developerName>
+        <label>Check status of an issue</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>I can help report an issue with your equipment. I also see that Chris, a service rep that is available to speak with you about this right now. Would you like to speak with him?</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <botNavigation>
+                <botNavigationLinks>
+                    <targetBotDialog>Continue_with_Chat</targetBotDialog>
+                </botNavigationLinks>
+                <botNavigationLinks>
+                    <targetBotDialog>Call_In</targetBotDialog>
+                </botNavigationLinks>
+                <type>Redirect</type>
+            </botNavigation>
+            <type>Navigation</type>
+        </botSteps>
+        <developerName>Report_a_new_issue</developerName>
+        <label>Report a new issue</label>
+        <mlIntent>Report_a_new_issue</mlIntent>
+        <mlIntentTrainingEnabled>false</mlIntentTrainingEnabled>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Update_profile</developerName>
+        <label>Update profile</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Hi Lauren, I’m &apos;ASHA&apos;, a digital assistant. You can ask me anything or choose a popular item below</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <botNavigation>
+                <botNavigationLinks>
+                    <targetBotDialog>Main_Menu</targetBotDialog>
+                </botNavigationLinks>
+                <type>Redirect</type>
+            </botNavigation>
+            <type>Navigation</type>
+        </botSteps>
+        <developerName>Welcome</developerName>
+        <label>Welcome</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botNavigation>
+                <botNavigationLinks>
+                    <label>Check status of an issue</label>
+                    <targetBotDialog>Check_status_of_an_issue</targetBotDialog>
+                </botNavigationLinks>
+                <botNavigationLinks>
+                    <label>Report a new issue</label>
+                    <targetBotDialog>Report_a_new_issue</targetBotDialog>
+                </botNavigationLinks>
+                <botNavigationLinks>
+                    <label>Update profile</label>
+                    <targetBotDialog>Update_profile</targetBotDialog>
+                </botNavigationLinks>
+                <type>Redirect</type>
+            </botNavigation>
+            <type>Navigation</type>
+        </botSteps>
+        <developerName>Main_Menu</developerName>
+        <label>Main Menu</label>
+        <mlIntent>Main_Menu</mlIntent>
+        <mlIntentTrainingEnabled>false</mlIntentTrainingEnabled>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <conversationSystemMessage>
+                <type>Transfer</type>
+            </conversationSystemMessage>
+            <type>SystemMessage</type>
+        </botSteps>
+        <developerName>Transfer_To_Agent</developerName>
+        <label>Transfer To Agent</label>
+        <mlIntent>Transfer_To_Agent</mlIntent>
+        <mlIntentTrainingEnabled>false</mlIntentTrainingEnabled>
+        <showInFooterMenu>true</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Goodbye! Click the &quot;End Chat&quot; button to end this chat</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>End_Chat</developerName>
+        <label>End Chat</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Sorry, I didn&apos;t understand that.</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Confused</developerName>
+        <label>Confused</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Unfortunately, there are no agents available at the moment</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>No_Agent_Available</developerName>
+        <label>No Agent</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Unfortunately, a system error occurred. I&apos;ll connect you to an agent who can help.</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <conversationSystemMessage>
+                <type>Transfer</type>
+            </conversationSystemMessage>
+            <type>SystemMessage</type>
+        </botSteps>
+        <developerName>Error_Handling</developerName>
+        <label>Error Handler</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Got it. I can help you with a warranty question.</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <botMessages>
+                <message>I&apos;ve listed your activated equipment below:
+
+1. HE Tankless Water Heater - Warranty Active until 4/2024
+
+2. HE 2400BTU Blower - Warranty Active until 4/2024</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <botMessages>
+                <message>lwc:html:&lt;a target=&quot;_self&quot; href=&quot;https://sdodemo-main-166ce2cf6b6-172-17543c27ebd.force.com/professional/s/myassets&quot;  &gt;View your equipment here&lt;/a&gt;</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <botNavigation>
+                <botNavigationLinks>
+                    <targetBotDialog>Report_a_new_issue</targetBotDialog>
+                </botNavigationLinks>
+                <botNavigationLinks>
+                    <targetBotDialog>Activate_New_Equipment</targetBotDialog>
+                </botNavigationLinks>
+                <botNavigationLinks>
+                    <targetBotDialog>Check_status_of_an_issue</targetBotDialog>
+                </botNavigationLinks>
+                <botNavigationLinks>
+                    <targetBotDialog>Main_Menu</targetBotDialog>
+                </botNavigationLinks>
+                <type>Redirect</type>
+            </botNavigation>
+            <type>Navigation</type>
+        </botSteps>
+        <developerName>Warranty</developerName>
+        <label>Warranty</label>
+        <mlIntent>Warranty</mlIntent>
+        <mlIntentTrainingEnabled>false</mlIntentTrainingEnabled>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Service_Equipment</developerName>
+        <label>Service Equipment</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Activate_New_Equipment</developerName>
+        <label>Activate New Equipment</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Continue_with_Chat</developerName>
+        <label>Continue with Chat</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>lwc:html:You can call into our service center 24hs 7 days a week&lt;br /&gt;&lt;a target=&quot;_self&quot; href=&quot;tel:6178550495&quot;&gt;Click us at 617-855-0495&lt;/a&gt;</message>
+            </botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Call_In</developerName>
+        <label>Call In</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <conversationSystemDialogs>
+        <dialog>Error_Handling</dialog>
+        <type>ErrorHandling</type>
+    </conversationSystemDialogs>
+    <conversationSystemDialogs>
+        <dialog>No_Agent_Available</dialog>
+        <type>TransferFailed</type>
+    </conversationSystemDialogs>
+    <entryDialog>Welcome</entryDialog>
+    <mainMenuDialog>Main_Menu</mainMenuDialog>
+    <nlpProviders>
+        <language>en_US</language>
+        <nlpProviderType>EinsteinAi</nlpProviderType>
+    </nlpProviders>
+</BotVersion>
